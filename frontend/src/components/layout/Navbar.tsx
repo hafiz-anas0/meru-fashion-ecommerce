@@ -32,7 +32,7 @@ export default function Navbar() {
                     className=""
                     onClick={() => setIsMenuOpen(false)}
                 >
-                    <span className="font-display text-2xl tracking-[0.18em] sm:text-3xl">
+                    <span className="font-display text-2xl tracking-[0.18em] text-meru-dark/75 sm:text-3xl">
                         MERU
                     </span>
                 </Link>
