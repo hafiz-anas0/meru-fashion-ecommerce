@@ -13,6 +13,7 @@
   --font-display: var(--font-fraunces);
   --font-body: var(--font-inter);
 }
+
 :root {
   --background: #f3f1ec;
   --foreground: #24231f;
