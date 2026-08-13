@@ -25,12 +25,13 @@ const accountLinks = [
 export default function Footer() {
     return (
         <footer className="bg-meru-dark text-meru-stone">
-            <div className="mx-auto max-w-[1600px] px-6 py-12 sm:px-10 lg:px-12">
+            <div className="mx-auto max-w-[1600px] px-6 py-12 sm:px-10 sm:py-14 lg:px-12 lg:py-16">
+
                 {/* Main Footer */}
-                <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-5">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-10 sm:gap-y-12 md:grid-cols-4 lg:grid-cols-5 lg:gap-12">
 
                     {/* Brand */}
-                    <div className="col-span-2 md:col-span-1">
+                    <div className="col-span-2 md:col-span-4 lg:col-span-1">
                         <Link
                             href="/"
                             className="font-display text-3xl tracking-[0.12em] transition-colors duration-200 hover:text-meru-accent"
@@ -38,9 +39,9 @@ export default function Footer() {
                             MERU
                         </Link>
 
-                        <p className="mt-4 max-w-xs text-sm leading-6 text-meru-border">
-                            A considered approach to modern fashion and everyday style.
-                            Thoughtfully curated for the way you live.
+                        <p className="mt-4 max-w-sm text-sm leading-6 text-meru-border lg:max-w-xs">
+                            A considered approach to modern fashion and everyday
+                            style. Thoughtfully curated for the way you live.
                         </p>
                     </div>
 
@@ -50,7 +51,7 @@ export default function Footer() {
                             SHOP
                         </h3>
 
-                        <ul className="mt-5 space-y-3">
+                        <ul className="mt-4 space-y-2.5 sm:mt-5 sm:space-y-3">
                             {shopLinks.map((link) => (
                                 <li key={link.label}>
                                     <Link
@@ -70,7 +71,7 @@ export default function Footer() {
                             HELP
                         </h3>
 
-                        <ul className="mt-5 space-y-3">
+                        <ul className="mt-4 space-y-2.5 sm:mt-5 sm:space-y-3">
                             {helpLinks.map((link) => (
                                 <li key={link.label}>
                                     <Link
@@ -90,7 +91,7 @@ export default function Footer() {
                             ACCOUNT
                         </h3>
 
-                        <ul className="mt-5 space-y-3">
+                        <ul className="mt-4 space-y-2.5 sm:mt-5 sm:space-y-3">
                             {accountLinks.map((link) => (
                                 <li key={link.label}>
                                     <Link
@@ -110,7 +111,7 @@ export default function Footer() {
                             FOLLOW
                         </h3>
 
-                        <div className="mt-5 flex items-center gap-5">
+                        <div className="mt-4 flex items-center gap-5 sm:mt-5">
                             <a
                                 href="#"
                                 aria-label="Instagram"
@@ -139,7 +140,8 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Footer */}
-                <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-[#4A4943] pt-6 text-xs text-meru-border">
+                <div className="mt-10 flex flex-col items-center gap-4 border-t border-[#4A4943] pt-6 text-center text-xs text-meru-border sm:mt-12 sm:gap-5 sm:flex-row sm:justify-between sm:text-left">
+
                     <p>© 2026 MERU. All rights reserved.</p>
 
                     <p>

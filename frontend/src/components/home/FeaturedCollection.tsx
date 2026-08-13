@@ -86,10 +86,16 @@ export default function FeaturedCollection() {
                                 {/* Add To Bag */}
                                 <button
                                     type="button"
-                                    className="mt-5 flex w-full items-center justify-center gap-4 bg-meru-slate px-4 py-3 font-medium tracking-[0.12em] text-white! transition-colors duration-200 hover:bg-meru-accent"
+                                    aria-label={`Add ${product.name} to bag`}
+                                    className="mt-4 flex w-full items-center justify-center bg-meru-slate px-2 py-3 text-meru-white transition-colors duration-200 hover:bg-meru-accent sm:mt-5 sm:gap-2 sm:px-3"
                                 >
-                                    <ShoppingBag size={16} strokeWidth={1.5} />
-                                    <span className="text-sm">
+                                    <ShoppingBag
+                                        size={18}
+                                        strokeWidth={1.5}
+                                        className="shrink-0"
+                                    />
+
+                                    <span className="ml-2 hidden whitespace-nowrap text-sm font-medium tracking-[0.08em] sm:inline">
                                         ADD TO BAG
                                     </span>
                                 </button>
