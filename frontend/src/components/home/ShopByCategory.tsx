@@ -29,7 +29,7 @@ export default function ShopByCategory() {
                         <Link
                             key={category.name}
                             href={category.href}
-                            className="group relative block aspect-[4/5] overflow-hidden"
+                            className="group relative block aspect-4/5 overflow-hidden"
                         >
                             <Image
                                 src={category.image}
@@ -39,7 +39,7 @@ export default function ShopByCategory() {
                             />
 
                             {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-meru-dark/80 via-meru-dark/20 to-transparent transition-opacity duration-300 group-hover:from-meru-dark/90" />
+                            <div className="absolute inset-0 bg-linear-to-t from-meru-dark/80 via-meru-dark/20 to-transparent transition-opacity duration-300 group-hover:from-meru-dark/90" />
 
                             {/* Content */}
                             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 sm:p-8">

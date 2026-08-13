@@ -31,7 +31,7 @@ export default function Hero() {
         >
             {/* Hero Image */}
             <div
-                className="absolute inset-0 bg-meru-stone/70 sm:bg-gradient-to-r sm:from-meru-stone/95 sm:via-meru-stone/65 sm:to-transparent"
+                className="absolute inset-0 bg-meru-stone/70 sm:bg-linear-to-r sm:from-meru-stone/95 sm:via-meru-stone/65 sm:to-transparent"
                 style={{
                     transform: `translate(${position.x * 6}px, ${position.y * 6
                         }px)`,

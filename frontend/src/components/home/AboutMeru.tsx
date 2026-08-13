@@ -25,7 +25,7 @@ export default function AboutMeru() {
                 {/* Editorial Content */}
                 <div className="grid overflow-hidden lg:grid-cols-2">
                     {/* Image */}
-                    <div className="relative min-h-[320px] sm:min-h-[450px] lg:min-h-[620px]">
+                    <div className="relative min-h-80 sm:min-h-112.5 lg:min-h-155">
                         <Image
                             src="/images/about-meru.png"
                             alt="MERU heritage and contemporary fashion"
