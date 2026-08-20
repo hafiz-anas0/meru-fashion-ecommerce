@@ -107,7 +107,7 @@ const seedData = async () => {
                 { slug: categoryData.slug },
                 categoryData,
                 {
-                    new: true,
+                    returnDocument: "after",
                     upsert: true,
                     setDefaultsOnInsert: true,
                 }
@@ -129,7 +129,7 @@ const seedData = async () => {
                     category: categoryMap[categorySlug],
                 },
                 {
-                    new: true,
+                    returnDocument: "after",
                     upsert: true,
                     setDefaultsOnInsert: true,
                 }
