@@ -4,14 +4,178 @@ const Category = require("../models/Category");
 
 const getProducts = async (req, res) => {
     try {
-        const products = await Product.find({
+        const {
+            search,
+            category,
+            minPrice,
+            maxPrice,
+            featured,
+            sort = "newest",
+            page = 1,
+            limit = 12,
+        } = req.query;
+
+        // Build the product filter
+        const filter = {
             isActive: true,
-        })
+        };
+
+        // Search by product name or description
+        if (search) {
+            filter.$or = [
+                {
+                    name: {
+                        $regex: search,
+                        $options: "i",
+                    },
+                },
+                {
+                    description: {
+                        $regex: search,
+                        $options: "i",
+                    },
+                },
+            ];
+        }
+
+        // Filter by category slug
+        if (category) {
+            const categoryExists = await Category.findOne({
+                slug: category.toLowerCase(),
+                isActive: true,
+            });
+
+            if (!categoryExists) {
+                return res.status(404).json({
+                    message: "Category not found",
+                });
+            }
+
+            filter.category = categoryExists._id;
+        }
+
+
+        if (
+            minPrice !== undefined &&
+            maxPrice !== undefined &&
+            Number(minPrice) > Number(maxPrice)
+        ) {
+            return res.status(400).json({
+                message: "Minimum price cannot be greater than maximum price",
+            });
+        }
+
+        // Filter by minimum price
+        if (minPrice !== undefined) {
+            const minimumPrice = Number(minPrice);
+
+            if (Number.isNaN(minimumPrice) || minimumPrice < 0) {
+                return res.status(400).json({
+                    message: "Invalid minimum price",
+                });
+            }
+
+            filter.price = {
+                ...filter.price,
+                $gte: minimumPrice,
+            };
+        }
+
+        // Filter by maximum price
+        if (maxPrice !== undefined) {
+            const maximumPrice = Number(maxPrice);
+
+            if (Number.isNaN(maximumPrice) || maximumPrice < 0) {
+                return res.status(400).json({
+                    message: "Invalid maximum price",
+                });
+            }
+
+            filter.price = {
+                ...filter.price,
+                $lte: maximumPrice,
+            };
+        }
+
+        // Filter featured products
+        if (featured !== undefined) {
+            if (featured !== "true" && featured !== "false") {
+                return res.status(400).json({
+                    message: "Featured must be true or false",
+                });
+            }
+
+            filter.featured = featured === "true";
+        }
+
+        // Pagination
+        const currentPage = Number(page);
+        const productsPerPage = Number(limit);
+
+        if (
+            Number.isNaN(currentPage) ||
+            currentPage < 1 ||
+            !Number.isInteger(currentPage)
+        ) {
+            return res.status(400).json({
+                message: "Page must be a positive integer",
+            });
+        }
+
+        if (
+            Number.isNaN(productsPerPage) ||
+            productsPerPage < 1 ||
+            !Number.isInteger(productsPerPage)
+        ) {
+            return res.status(400).json({
+                message: "Limit must be a positive integer",
+            });
+        }
+
+        const skip = (currentPage - 1) * productsPerPage;
+
+        // Sorting
+        let sortOption = { createdAt: -1 };
+
+        if (sort === "price_asc") {
+            sortOption = { price: 1 };
+        } else if (sort === "price_desc") {
+            sortOption = { price: -1 };
+        } else if (sort === "name_asc") {
+            sortOption = { name: 1 };
+        } else if (sort === "name_desc") {
+            sortOption = { name: -1 };
+        } else if (sort === "oldest") {
+            sortOption = { createdAt: 1 };
+        } else if (sort !== "newest") {
+            return res.status(400).json({
+                message:
+                    "Invalid sort option. Use newest, oldest, price_asc, price_desc, name_asc, or name_desc",
+            });
+        }
+
+        // Get total number of matching products
+        const totalProducts = await Product.countDocuments(filter);
+
+        // Get products
+        const products = await Product.find(filter)
             .populate("category", "name slug image")
-            .sort({ createdAt: -1 });
+            .sort(sortOption)
+            .skip(skip)
+            .limit(productsPerPage);
+
+        const totalPages = Math.ceil(totalProducts / productsPerPage);
 
         res.status(200).json({
             products,
+            pagination: {
+                currentPage,
+                productsPerPage,
+                totalProducts,
+                totalPages,
+                hasNextPage: currentPage < totalPages,
+                hasPreviousPage: currentPage > 1,
+            },
         });
     } catch (error) {
         console.error("Get products error:", error);
