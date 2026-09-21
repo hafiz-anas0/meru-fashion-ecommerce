@@ -14,7 +14,7 @@ The project combines a modern responsive storefront with a Node.js/Express backe
 **Frontend:**
 https://merufashion.vercel.app
 
-**Backend API:**
+**Backend:**
 https://meru-fashion-ecommerce-backend.vercel.app
 
 ---
