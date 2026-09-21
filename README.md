@@ -4,6 +4,9 @@ A modern, full-stack fashion and lifestyle e-commerce platform built for Pakista
 
 MERU is being developed as a production-ready e-commerce product with a focus on clean design, scalable architecture, secure authentication, seamless shopping, payments, real-time features, and a complete admin dashboard.
 
+##Live Demo
+https://merufashion.vercel.app/
+
 ## Tech Stack
 
 ### Frontend
